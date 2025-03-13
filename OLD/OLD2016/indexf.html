@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Titre de la page</title>
+
+  
+  <script language="Javascript">
+function verif_nombre(champ)
+  {
+	var chiffres = new RegExp("[0-9]");
+	var verif;
+	var points = 0;
+ 
+	for(x = 0; x < champ.value.length; x++)
+	{
+            verif = chiffres.test(champ.value.charAt(x));
+	    if(champ.value.charAt(x) == "."){points++;}
+            if(points > 1){verif = false; points = 1;}
+  	    if(verif == false){champ.value = champ.value.substr(0,x) + champ.value.substr(x+1,champ.value.length-x+1); x--;}
+		if(champ.value.length>8){champ.value = champ.value.substr(0,8) ;} 
+		
+	}
+  }
+</script>
+
+
+</head>
+<body>
+<form class="pure-form">
+    <fieldset>
+        <legend>A compact inline form</legend>
+
+        <input type="text" placeholder="Email" onkeyup="verif_nombre(this);">
+        <input type="password" placeholder="Password">
+
+        <label for="remember">
+            <input id="remember" type="checkbox"> Remember me
+        </label>
+
+        <button type="submit" class="pure-button pure-button-primary">Sign in</button>
+    </fieldset>
+</form>
+</body>
+</html>

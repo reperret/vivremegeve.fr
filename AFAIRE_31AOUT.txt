@@ -1,0 +1,6 @@
+Le 31 août au soir :
+
+- Changer la couleur dans le fichier generationCarteAdherentFonction.php et mettre #33ab54
+
+- Faire tourner ce script :  
+update utilisateur set renouvellement=1 where renouvellement=0 and paiement=1

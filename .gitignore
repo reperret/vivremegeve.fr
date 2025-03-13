@@ -1,0 +1,6 @@
+/avatars/
+/cartesGenerees/
+config.php
+.env
+node_modules/
+vendor/
