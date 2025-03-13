@@ -168,7 +168,7 @@ $resultats->closeCursor();
     <div class="w-section banner">
         <div class="w-container con-baner">
             <div class="sub-banner">
-                <div class="w-hidden-tiny" data-ix="zom-out">Pour mieux vivre dans notre village test !</div>
+                <div class="w-hidden-tiny" data-ix="zom-out">Pour mieux vivre dans notre village testtt !</div>
             </div>
             <div class="div-tittle header" data-ix="from-bottom">
                 <h3>Adhérer à l'association VIVRE <span class="lighter _2">Megève</span></h3>
