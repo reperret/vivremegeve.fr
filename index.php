@@ -1,15 +1,14 @@
-<?php 	
-session_start(); 
-include('connexion.php'); 
+<?php
+session_start();
+include('connexion.php');
 $resultats = $dbh->query('SET NAMES UTF8');
 $resultats = $dbh->query('SELECT * from document where avantagesEnCours=1');
-$lignes=$resultats->fetchAll(PDO::FETCH_OBJ);
-$flash=NULL;
-$lienAvantages="actualites/";
-foreach ($lignes as $colonne)
-{ 
-    $lienAvantages.=$colonne->nomDocument;
-}	
+$lignes = $resultats->fetchAll(PDO::FETCH_OBJ);
+$flash = NULL;
+$lienAvantages = "actualites/";
+foreach ($lignes as $colonne) {
+    $lienAvantages .= $colonne->nomDocument;
+}
 $resultats->closeCursor();
 ?>
 
@@ -28,26 +27,26 @@ $resultats->closeCursor();
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" type="image/x-icon" href="http://www.vivremegeve.fr/vivremegeve3/favicon.ico">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+        integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <script type="text/javascript" src="js/modernizr-2.7.1.js"></script>
 
     <style type="text/css">
-        .button-avantages {
-            background: rgb(28, 184, 65);
-            font-size: 1.3em;
-            color: white;
-            font-weight: bold
-                /* this is a green */
+    .button-avantages {
+        background: rgb(28, 184, 65);
+        font-size: 1.3em;
+        color: white;
+        font-weight: bold
+            /* this is a green */
+    }
+
+
+
+    @media screen and (max-width: 1200px) {
+        .div-dobule.x-2 {
+            padding-right: 100px;
         }
-
-
-
-        @media screen and (max-width: 1200px) {
-            .div-dobule.x-2 {
-                padding-right: 100px;
-            }
-        }
-
+    }
     </style>
 </head>
 
@@ -70,61 +69,51 @@ $resultats->closeCursor();
 
 
     <?php
-	
-try 
-{
 
-	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$dbh->query("SET NAMES 'utf8'");
-	$sql = 'SELECT * FROM parametre where idParametre=1';
-	$resultats = $dbh->query($sql);
-	$lignes=$resultats->fetchAll(PDO::FETCH_OBJ);
-			
-	foreach ($lignes as $colonne)
-	{	
-		$activationFlash=$colonne->valueParametre;
-	}
-}
-catch(Exception $e)
-{
-  //$dbh->rollBack();
-  echo "Une erreur est survenue. Veuillez cliquez <a href=\"javascript:history.back()\">ici</a>et ressayer l'opération." ;
-  echo $e->getMessage();
-}
+    try {
 
-if($activationFlash=="1")
-{
-	
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $dbh->query("SET NAMES 'utf8'");
+        $sql = 'SELECT * FROM parametre where idParametre=1';
+        $resultats = $dbh->query($sql);
+        $lignes = $resultats->fetchAll(PDO::FETCH_OBJ);
 
+        foreach ($lignes as $colonne) {
+            $activationFlash = $colonne->valueParametre;
+        }
+    } catch (Exception $e) {
+        //$dbh->rollBack();
+        echo "Une erreur est survenue. Veuillez cliquez <a href=\"javascript:history.back()\">ici</a>et ressayer l'opération.";
+        echo $e->getMessage();
+    }
 
-try 
-{
-
-	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-	$dbh->query("SET NAMES 'utf8'");
-	$sql = 'SELECT * FROM flash where idFlash=(SELECT max(idFlash) FROM flash)';
-	$resultats = $dbh->query($sql);
-	$lignes=$resultats->fetchAll(PDO::FETCH_OBJ);
-			
-	foreach ($lignes as $colonne)
-	{	
-		$contenu=$colonne->infoFlash;
-		$datePublication=$colonne->dateFlash;
-		$date = new DateTime($datePublication);
-	}
-		
-}	
-catch(Exception $e)
-{
-  //$dbh->rollBack();
-  echo "Une erreur est survenue. Veuillez cliquez <a href=\"javascript:history.back()\">ici</a>et ressayer l'opération." ;
-  echo $e->getMessage();
-}
+    if ($activationFlash == "1") {
 
 
 
-?>
+        try {
+
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $dbh->query("SET NAMES 'utf8'");
+            $sql = 'SELECT * FROM flash where idFlash=(SELECT max(idFlash) FROM flash)';
+            $resultats = $dbh->query($sql);
+            $lignes = $resultats->fetchAll(PDO::FETCH_OBJ);
+
+            foreach ($lignes as $colonne) {
+                $contenu = $colonne->infoFlash;
+                $datePublication = $colonne->dateFlash;
+                $date = new DateTime($datePublication);
+            }
+        } catch (Exception $e) {
+            //$dbh->rollBack();
+            echo "Une erreur est survenue. Veuillez cliquez <a href=\"javascript:history.back()\">ici</a>et ressayer l'opération.";
+            echo $e->getMessage();
+        }
+
+
+
+    ?>
 
 
 
@@ -154,17 +143,16 @@ catch(Exception $e)
                     <h2>FLASH INFO - <?php echo $date->format('d/m/Y'); ?> </h2>
                 </div>
                 <script type="text/javascript">
-                    var clignotement = function() {
-                        if (document.getElementById('DivClignotante').style.visibility == 'visible') {
-                            document.getElementById('DivClignotante').style.visibility = 'hidden';
-                        } else {
-                            document.getElementById('DivClignotante').style.visibility = 'visible';
-                        }
-                    };
-                    // mise en place de l appel de la fonction toutes les 0.8 secondes 
-                    // Pour arrêter le clignotement : clearInterval(periode); 
-                    periode = setInterval(clignotement, 700);
-
+                var clignotement = function() {
+                    if (document.getElementById('DivClignotante').style.visibility == 'visible') {
+                        document.getElementById('DivClignotante').style.visibility = 'hidden';
+                    } else {
+                        document.getElementById('DivClignotante').style.visibility = 'visible';
+                    }
+                };
+                // mise en place de l appel de la fonction toutes les 0.8 secondes 
+                // Pour arrêter le clignotement : clearInterval(periode); 
+                periode = setInterval(clignotement, 700);
                 </script>
 
 
@@ -200,12 +188,14 @@ catch(Exception $e)
     <div class="w-section section s-2">
         <div class="w-container">
             <div class="div-tittle">
-                <h3> <span class="color">POURQUOI </span>ADHEREZ A L'ASSOCIATION ?</h3>
+                <h3> <span class="color">POURQUOI </span>ADHEREZ A L'ASSOCIATION... ?</h3>
                 <br><br>
-                <a href="<?php echo $lienAvantages;?>" class="button-avantages pure-button" target="_blank">VOIR LES AVANTAGES</a>
+                <a href="<?php echo $lienAvantages; ?>" class="button-avantages pure-button" target="_blank">VOIR LES
+                    AVANTAGES</a>
             </div>
             <div class="center">
-                <h2>L'adhésion à l'association Vivre Megève couplée à la Carte de Résident délivrée par la municipalité permet d'obtenir de nombreuses remises tarifaires. C'est notamment le cas pour :</h2>
+                <h2>L'adhésion à l'association Vivre Megève couplée à la Carte de Résident délivrée par la municipalité
+                    permet d'obtenir de nombreuses remises tarifaires. C'est notamment le cas pour :</h2>
             </div>
             <br><br>
 
@@ -287,10 +277,12 @@ catch(Exception $e)
                 Retrouvez le tableau complet des avantages : <br>
 
 
-                <a href="<?php echo $lienAvantages;?>" class="button-avantages pure-button" target="_blank">VOIR TOUS LES AVANTAGES</a>
+                <a href="<?php echo $lienAvantages; ?>" class="button-avantages pure-button" target="_blank">VOIR TOUS
+                    LES AVANTAGES</a>
                 <br><br>
 
-                <h2> Pour connaitre les modalités d'utilisation des réductions ci dessus appelez l'association au 06 03 26 38 54</h2>
+                <h2> Pour connaitre les modalités d'utilisation des réductions ci dessus appelez l'association au 06 03
+                    26 38 54</h2>
             </center>
 
 
@@ -321,7 +313,10 @@ catch(Exception $e)
             </div>
             <div class="center">
 
-                <h3>Adhésion 100% en ligne à tout moment. La validité d'une carte s'étend du 1er septembre au 31 août. Très simplement, <a href="inscription.php">inscrivez vous</a> sur notre site <u>www.vivremegeve.fr</u>, <u>muni obligatoirement</u> de votre carte de résident délivrée par la Mairie et réglez la somme de <u><?php echo $montantAnneeEnCours; ?>€</u></h3>
+                <h3>Adhésion 100% en ligne à tout moment. La validité d'une carte s'étend du 1er septembre au 31 août.
+                    Très simplement, <a href="inscription.php">inscrivez vous</a> sur notre site
+                    <u>www.vivremegeve.fr</u>, <u>muni obligatoirement</u> de votre carte de résident délivrée par la
+                    Mairie et réglez la somme de <u><?php echo $montantAnneeEnCours; ?>€</u></h3>
             </div>
         </div>
 
@@ -334,7 +329,10 @@ catch(Exception $e)
             </div>
             <div class="center">
 
-                <h3>Vous êtes déjà inscrit sur le site, vous accédez uniquement à votre <a href="compteclient.php">compte client</a> et vous vous laissez guider par la procédure, qui consiste à payer en ligne la nouvelle cotisation de <?php echo $montantAnneeEnCours;?>€ ou envoyer un chèque de <?php echo $montantAnneeEnCours;?>€ à l'association Vivre Megève</h3>
+                <h3>Vous êtes déjà inscrit sur le site, vous accédez uniquement à votre <a
+                        href="compteclient.php">compte client</a> et vous vous laissez guider par la procédure, qui
+                    consiste à payer en ligne la nouvelle cotisation de <?php echo $montantAnneeEnCours; ?>€ ou envoyer
+                    un chèque de <?php echo $montantAnneeEnCours; ?>€ à l'association Vivre Megève</h3>
             </div>
         </div>
 
@@ -349,7 +347,8 @@ catch(Exception $e)
     <footer class="w-section footer">
         <div class="bottom-footer">
             <div class="w-container cont-center">
-                <p class="p-footer">Création du site : <a href="http://www.remyperret.com" target="_blank">Rémy PERRET </a></p>
+                <p class="p-footer">Création du site : <a href="http://www.remyperret.com" target="_blank">Rémy PERRET
+                    </a></p>
             </div>
         </div>
 
@@ -361,7 +360,9 @@ catch(Exception $e)
                         <h1 class="top-footer">A propos de l'association</h1>
                     </div>
                     <div class="div-spc">
-                        <p><em><strong>Association</strong> de type loi "1901" crée à titre non lucratif avec pour objectif de représenter, défendre et informer ses membres en leur qualité d'usager des Services Publics Industriels et Commerciaux (SPIC)<br></em></p>
+                        <p><em><strong>Association</strong> de type loi "1901" crée à titre non lucratif avec pour
+                                objectif de représenter, défendre et informer ses membres en leur qualité d'usager des
+                                Services Publics Industriels et Commerciaux (SPIC)<br></em></p>
                     </div>
                 </div>
 
@@ -373,8 +374,10 @@ catch(Exception $e)
                     </div>
                     <div class="div-spc">
                         <p><strong>Téléphone:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0603263854<br>
-                        <p><strong>Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact@vivremegeve.fr<br><strong>Adresse:</strong>&nbsp;&nbsp;&nbsp;&nbsp;Tour MAGDELAIN, 28, place de l'église
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;74120 MEGEVE&nbsp;</p>
+                        <p><strong>Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact@vivremegeve.fr<br><strong>Adresse:</strong>&nbsp;&nbsp;&nbsp;&nbsp;Tour
+                            MAGDELAIN, 28, place de l'église
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;74120
+                            MEGEVE&nbsp;</p>
                     </div>
                 </div>
             </div>
