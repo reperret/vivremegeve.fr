@@ -168,7 +168,7 @@ $resultats->closeCursor();
     <div class="w-section banner">
         <div class="w-container con-baner">
             <div class="sub-banner">
-                <div class="w-hidden-tiny" data-ix="zom-out">Pour mieux vivre dans notre village...</div>
+                <div class="w-hidden-tiny" data-ix="zom-out">Pour mieux vivre dans notre village test !</div>
             </div>
             <div class="div-tittle header" data-ix="from-bottom">
                 <h3>Adhérer à l'association VIVRE <span class="lighter _2">Megève</span></h3>
@@ -188,7 +188,7 @@ $resultats->closeCursor();
     <div class="w-section section s-2">
         <div class="w-container">
             <div class="div-tittle">
-                <h3> <span class="color">POURQUOI </span>ADHEREZ A L'ASSOCIATION... ?</h3>
+                <h3> <span class="color">POURQUOI </span>ADHEREZ A L'ASSOCIATION ?</h3>
                 <br><br>
                 <a href="<?php echo $lienAvantages; ?>" class="button-avantages pure-button" target="_blank">VOIR LES
                     AVANTAGES</a>
@@ -316,7 +316,8 @@ $resultats->closeCursor();
                 <h3>Adhésion 100% en ligne à tout moment. La validité d'une carte s'étend du 1er septembre au 31 août.
                     Très simplement, <a href="inscription.php">inscrivez vous</a> sur notre site
                     <u>www.vivremegeve.fr</u>, <u>muni obligatoirement</u> de votre carte de résident délivrée par la
-                    Mairie et réglez la somme de <u><?php echo $montantAnneeEnCours; ?>€</u></h3>
+                    Mairie et réglez la somme de <u><?php echo $montantAnneeEnCours; ?>€</u>
+                </h3>
             </div>
         </div>
 
