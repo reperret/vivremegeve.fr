@@ -1,12 +1,11 @@
-<?php 	session_start(); 
+<?php session_start();
 
-include('connexion.php');  
+include('connexion.php');
 
-$erreur=-1;
-$envoi=false;
-if (isset($_POST['envoi']) && $_POST['envoi'] == 'ENVOYER') 
-{
-    
+$erreur = -1;
+$envoi = false;
+if (isset($_POST['envoi']) && $_POST['envoi'] == 'ENVOYER') {
+
     // Ma clé privée
     $secret = "6LflkJMUAAAAAD1rQQ4WlGC3SL2Fs3f62o-d1GIt";
     // Paramètre renvoyé par le recaptcha
@@ -14,10 +13,10 @@ if (isset($_POST['envoi']) && $_POST['envoi'] == 'ENVOYER')
     // On récupère l'IP de l'utilisateur
     $remoteip = $_SERVER['REMOTE_ADDR'];
 
-    $api_url="https://www.google.com/recaptcha/api/siteverify?secret=" 
-    . $secret
-    . "&response=" . $response
-    . "&remoteip=" . $remoteip ;
+    $api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
+        . $secret
+        . "&response=" . $response
+        . "&remoteip=" . $remoteip;
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $api_url);
@@ -25,15 +24,14 @@ if (isset($_POST['envoi']) && $_POST['envoi'] == 'ENVOYER')
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     $output = curl_exec($ch);
-    $info = curl_getinfo($ch); 
+    $info = curl_getinfo($ch);
     curl_close($ch);
 
 
     //echo $output;echo "<br><br>";
-    $captcha=json_decode($output, true);
+    $captcha = json_decode($output, true);
 
-    if ( $captcha['success'] == true )
-    {
+    if ($captcha['success'] == true) {
         // get the posted data
         $name = $_POST["nom"];
         $prenom = $_POST["prenom"];
@@ -48,17 +46,14 @@ if (isset($_POST['envoi']) && $_POST['envoi'] == 'ENVOYER')
         $email_content .= "Numero : $telephone<br><br>";
         $email_content .= "Message :<br>$message";
 
-        $envoi=sendMail("contact@vivremegeve.fr", "Nouveau message", $email_content, "Interface admin", "https://www.vivremegeve.fr/admin", "6330280", "nouveau message depuis le site", NULL);
-
-    }
-    else 
-    {
+        $envoi = sendMail("contact@vivremegeve.fr", "Nouveau message", $email_content, "Interface admin", "https://www.vivremegeve.fr/admin", "6330280", "nouveau message depuis le site", NULL);
+    } else {
         $erreur = 'Veuillez valider le captcha ci dessous';
     }
-    if($captcha['success'] == false) $erreur = 'Veuillez valider le captcha ci dessous';
+    if ($captcha['success'] == false) $erreur = 'Veuillez valider le captcha ci dessous';
 }
 
-        
+
 
 
 ?>
@@ -81,7 +76,6 @@ if (isset($_POST['envoi']) && $_POST['envoi'] == 'ENVOYER')
                 padding-right: 100px;
             }
         }
-
     </style>
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -102,7 +96,6 @@ if (isset($_POST['envoi']) && $_POST['envoi'] == 'ENVOYER')
                 alert('reCAPTCHA marked');
             }
         })
-
     </script>
 </head>
 
@@ -150,7 +143,7 @@ if (isset($_POST['envoi']) && $_POST['envoi'] == 'ENVOYER')
         <div class="w-section section gray">
             <center>
                 <h3>
-                    Téléphone :<strong> 06 03 26 38 54</strong> </h3>
+                    Téléphone :<strong> +33603263854</strong> </h3>
 
                 <h3>Tour MAGDELAIN, 28, place de l'église
                     74120 MEGEVE
@@ -165,41 +158,44 @@ if (isset($_POST['envoi']) && $_POST['envoi'] == 'ENVOYER')
 
             <div class="w-container">
 
-                <?php 
-$nePasAfficher=0;
-if($envoi)
-{
-    $nePasAfficher=1;
-?>
-                <div class="div-tittle">
-                    <h4>Votre message nous a bien été <span class="color">transmis</span></h4>
-                </div>
-
-                <?php 
-}
-elseif($erreur!=-1)
-{
-?>
-                <div class="div-tittle">
-                    <h4><span class="color"><?php echo $erreur ;?></span></h4>
-                </div>
                 <?php
-}
-?>
+                $nePasAfficher = 0;
+                if ($envoi) {
+                    $nePasAfficher = 1;
+                ?>
+                    <div class="div-tittle">
+                        <h4>Votre message nous a bien été <span class="color">transmis</span></h4>
+                    </div>
+
+                <?php
+                } elseif ($erreur != -1) {
+                ?>
+                    <div class="div-tittle">
+                        <h4><span class="color"><?php echo $erreur; ?></span></h4>
+                    </div>
+                <?php
+                }
+                ?>
                 <div class="w-form">
 
                     <form action="contact.php" method="post">
                         <center> <span class="msg-error error"></span>
-                            <div id="recaptcha" class="g-recaptcha" data-sitekey="6LflkJMUAAAAAFpk1PZYr2XOdnsigAjr9HMybi9m"></div>
+                            <div id="recaptcha" class="g-recaptcha"
+                                data-sitekey="6LflkJMUAAAAAFpk1PZYr2XOdnsigAjr9HMybi9m"></div>
                         </center>
 
-                        <input class="w-input text-filed" type="text" placeholder="Nom" name="nom" value="<?php if($nePasAfficher=="0") echo $_POST['nom'];?>">
-                        <input class="w-input text-filed no-l" type="text" placeholder="Prénom" name="prenom" value="<?php if($nePasAfficher=="0") echo $_POST['prenom'];?>">
-                        <input class="w-input text-filed" type="email" placeholder="Adresse email" name="email" value="<?php if($nePasAfficher=="0")echo $_POST['email'];?>">
+                        <input class="w-input text-filed" type="text" placeholder="Nom" name="nom"
+                            value="<?php if ($nePasAfficher == "0") echo $_POST['nom']; ?>">
+                        <input class="w-input text-filed no-l" type="text" placeholder="Prénom" name="prenom"
+                            value="<?php if ($nePasAfficher == "0") echo $_POST['prenom']; ?>">
+                        <input class="w-input text-filed" type="email" placeholder="Adresse email" name="email"
+                            value="<?php if ($nePasAfficher == "0") echo $_POST['email']; ?>">
 
-                        <input class="w-input text-filed no-l" type="text" placeholder="Téléphone" name="telephone" value="<?php if($nePasAfficher=="0")echo $_POST['telephone'];?>">
+                        <input class="w-input text-filed no-l" type="text" placeholder="Téléphone" name="telephone"
+                            value="<?php if ($nePasAfficher == "0") echo $_POST['telephone']; ?>">
 
-                        <textarea class="w-input text-filed _100-p are" name="message" placeholder="Votre message"><?php if($nePasAfficher=="0") echo $_POST['message'];?></textarea>
+                        <textarea class="w-input text-filed _100-p are" name="message"
+                            placeholder="Votre message"><?php if ($nePasAfficher == "0") echo $_POST['message']; ?></textarea>
                         <br><br>
 
 
@@ -222,7 +218,8 @@ elseif($erreur!=-1)
             <footer class="w-section footer">
                 <div class="bottom-footer">
                     <div class="w-container cont-center">
-                        <p class="p-footer">Création du site : <a href="http://www.remyperret.com" target="_blank">Rémy PERRET </a></p>
+                        <p class="p-footer">Création du site : <a href="http://www.remyperret.com" target="_blank">Rémy
+                                PERRET </a></p>
                     </div>
                 </div>
 
@@ -234,7 +231,9 @@ elseif($erreur!=-1)
                                 <h1 class="top-footer">A propos de l'association</h1>
                             </div>
                             <div class="div-spc">
-                                <p><em><strong>Association</strong> de type loi "1901" crée à titre non lucratif avec pour objectif de représenter, défendre et informer ses membres en leur qualité d'usager des Services Publics Industriels et Commerciaux (SPIC)<br></em></p>
+                                <p><em><strong>Association</strong> de type loi "1901" crée à titre non lucratif avec
+                                        pour objectif de représenter, défendre et informer ses membres en leur qualité
+                                        d'usager des Services Publics Industriels et Commerciaux (SPIC)<br></em></p>
                             </div>
                         </div>
 
@@ -245,7 +244,11 @@ elseif($erreur!=-1)
                                 <h1 class="top-footer">Contact info</h1>
                             </div>
                             <div class="div-spc">
-                                <p> <strong>Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact@vivremegeve.fr<br><strong>Adresse:</strong>&nbsp;&nbsp;&nbsp;&nbsp;Tour MAGDELAIN, 28, place de l'église <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;74120 MEGEVE&nbsp;</p>
+                                <p> <strong>Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact@vivremegeve.fr<br><strong>Adresse:</strong>&nbsp;&nbsp;&nbsp;&nbsp;Tour
+                                    MAGDELAIN, 28, place de l'église
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;74120
+                                    MEGEVE&nbsp;
+                                </p>
                             </div>
                         </div>
                     </div>
