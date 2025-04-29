@@ -363,6 +363,30 @@ try {
         padding: 10px;
         max-width: 80%;
     }
+
+
+    .rgpd-consent {
+        margin: 10px 0;
+    }
+
+    .rgpd-consent label {
+        display: block;
+        font-size: 1.1em;
+        line-height: 1.4em;
+        color: #111;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .rgpd-consent input[type="checkbox"] {
+        margin-right: 10px;
+        transform: scale(1.3);
+        vertical-align: middle;
+    }
+
+    .div-tittle h4 span.red {
+        color: red;
+    }
     </style>
 
 
@@ -859,30 +883,26 @@ try {
                             </div>
 
 
-
                             <br><br>
                             <div class="div-tittle">
-                                <h4>Consentement à la réception de communications</h4>
+                                <h4>Consentement à la réception de <span class="red">communications</span></h4>
                             </div>
 
-                            <div class="pure-control-group">
-                                <label></label>
-                                <input type="checkbox" name="rgpd_vivre_megeve" id="rgpd_vivre_megeve" value="1"
-                                    <?php if (isset($_POST['rgpd_vivre_megeve'])) echo 'checked'; ?>>
-                                <label for="rgpd_vivre_megeve">J'accepte de recevoir les communications de l'association
-                                    Vivre Megève
-                                    Vivre Megève</label>
+                            <div class="pure-control-group rgpd-consent">
+                                <label>
+                                    <input type="checkbox" name="rgpd_vivre_megeve" id="rgpd_vivre_megeve" value="1"
+                                        <?php if (isset($_POST['rgpd_vivre_megeve'])) echo 'checked'; ?>>
+                                    J'accepte de recevoir les communications de l'association Vivre Megève Vivre Megève
+                                </label>
                             </div>
 
-                            <div class="pure-control-group">
-                                <label></label>
-                                <input type="checkbox" name="rgpd_mairie_megeve" id="rgpd_mairie_megeve" value="1"
-                                    <?php if (isset($_POST['rgpd_mairie_megeve'])) echo 'checked'; ?>>
-                                <label for="rgpd_mairie_megeve">J'accepte de recevoir les offres sur les forfaits des
-                                    remontées mécaniques</label>
+                            <div class="pure-control-group rgpd-consent">
+                                <label>
+                                    <input type="checkbox" name="rgpd_mairie_megeve" id="rgpd_mairie_megeve" value="1"
+                                        <?php if (isset($_POST['rgpd_mairie_megeve'])) echo 'checked'; ?>>
+                                    J'accepte de recevoir les offres sur les forfaits des remontées mécaniques
+                                </label>
                             </div>
-
-                            <br><br>
 
 
                             <br><br>
