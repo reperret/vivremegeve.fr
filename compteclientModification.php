@@ -295,13 +295,15 @@ try {
                             </div>
 
                             <div class="pure-control-group">
-                                <label for="rgpd_vivre_megeve">Consentement Vivre Megève</label>
+                                <label for="rgpd_vivre_megeve">Je consens à recevoir les communications de la part de
+                                    l'association Vivre Megève</label>
                                 <input type="checkbox" name="rgpd_vivre_megeve" value="1"
                                     <?php if ($colonne->rgpd_vivre_megeve == 1) echo "checked"; ?>>
                             </div>
 
                             <div class="pure-control-group">
-                                <label for="rgpd_mairie_megeve">Consentement Forfaits/Mairie</label>
+                                <label for="rgpd_mairie_megeve">Je consens à recevoir les communications de la part de
+                                    la mairie pour les Forfaits de ski</label>
                                 <input type="checkbox" name="rgpd_mairie_megeve" value="1"
                                     <?php if ($colonne->rgpd_mairie_megeve == 1) echo "checked"; ?>>
                             </div>
