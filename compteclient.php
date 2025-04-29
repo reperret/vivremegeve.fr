@@ -1,50 +1,47 @@
 <?php
-try 
-{
-	include('connexion.php'); 
-	session_start();	
+try {
+    include('connexion.php');
+    session_start();
 
-//**************VERIFICATION ADMIN DEBUT**********************
-if (!isset($_SESSION['login'])) 
-{
-	header ('Location: seconnecter.php');
-	exit();
-}
-$paiement=NULL;
-$typePaiement=NULL;
-$idUtilisateur=NULL;
-$nom=NULL;    
-$prenom=NULL;
-$email=NULL;
-$ddn=NULL;
-$adresse=NULL;
-$code_postal=NULL;
-$ville=NULL;
-$codeMairie=NULL;
+    //**************VERIFICATION ADMIN DEBUT**********************
+    if (!isset($_SESSION['login'])) {
+        header('Location: seconnecter.php');
+        exit();
+    }
+    $paiement = NULL;
+    $typePaiement = NULL;
+    $idUtilisateur = NULL;
+    $nom = NULL;
+    $prenom = NULL;
+    $email = NULL;
+    $ddn = NULL;
+    $adresse = NULL;
+    $code_postal = NULL;
+    $ville = NULL;
+    $codeMairie = NULL;
 
 
 
 
-	$resultats = $dbh->query('SET NAMES UTF8');
-	$resultats = $dbh->query('SELECT paiement, typePaiement, prenom,nom,email, adresse ,ddn, ville, code_postal, idUtilisateur, codeMairie From utilisateur WHERE login LIKE "'.$_SESSION['login'].'"');
-	$lignes=$resultats->fetchAll(PDO::FETCH_OBJ);
- 
-	foreach ($lignes as $colonne)
-	{
-		$paiement=trim($colonne->paiement);
-		$typePaiement=trim($colonne->typePaiement);	
-        $idUtilisateur=trim($colonne->idUtilisateur);	
-        $nom=trim($colonne->nom);	
-		$prenom=trim($colonne->prenom);	
-        $email=trim($colonne->email);	  
-        $ddn=trim($colonne->ddn);
-        $adresse=trim($colonne->adresse);
-        $code_postal=trim($colonne->code_postal);
-        $ville=trim($colonne->ville);
-        $codeMairie=trim($colonne->codeMairie);	
-	}	
-	$resultats->closeCursor();
-	
+    $resultats = $dbh->query('SET NAMES UTF8');
+    $resultats = $dbh->query('SELECT paiement, typePaiement, prenom,nom,email, adresse ,ddn, ville, code_postal, idUtilisateur, codeMairie,  rgpd_vivre_megeve, rgpd_mairie_megeve From utilisateur WHERE login LIKE "' . $_SESSION['login'] . '"');
+    $lignes = $resultats->fetchAll(PDO::FETCH_OBJ);
+
+    foreach ($lignes as $colonne) {
+        $paiement = trim($colonne->paiement);
+        $typePaiement = trim($colonne->typePaiement);
+        $idUtilisateur = trim($colonne->idUtilisateur);
+        $nom = trim($colonne->nom);
+        $prenom = trim($colonne->prenom);
+        $email = trim($colonne->email);
+        $ddn = trim($colonne->ddn);
+        $adresse = trim($colonne->adresse);
+        $code_postal = trim($colonne->code_postal);
+        $ville = trim($colonne->ville);
+        $codeMairie = trim($colonne->codeMairie);
+    }
+    $resultats->closeCursor();
+
 ?>
 
 
@@ -66,23 +63,23 @@ $codeMairie=NULL;
     <script type="text/javascript" src="js/modernizr-2.7.1.js"></script>
 
     <style type="text/css">
-        .grand {
-            font-size: 2.2em;
-            color: #ea0079;
-        }
+    .grand {
+        font-size: 2.2em;
+        color: #ea0079;
+    }
 
-        table {
-            margin: auto;
-        }
+    table {
+        margin: auto;
+    }
 
-        @media screen and (max-width: 1200px) {
-            .div-dobule.x-2 {
-                padding-right: 100px;
-            }
+    @media screen and (max-width: 1200px) {
+        .div-dobule.x-2 {
+            padding-right: 100px;
         }
-
+    }
     </style>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+        integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 </head>
 
 <body>
@@ -111,7 +108,8 @@ $codeMairie=NULL;
             </div>
             <div class="w-container">
                 <div class="second-tittle white-2">
-                    <h3><?php echo $prenom; ?>, voici un résumé de votre compte (<a href="deconnexion.php">deconnexion</a>)</h3>
+                    <h3><?php echo $prenom; ?>, voici un résumé de votre compte (<a
+                            href="deconnexion.php">deconnexion</a>)</h3>
                 </div>
             </div>
         </div>
@@ -147,13 +145,13 @@ $codeMairie=NULL;
                 <div class="center">
 
                     <?php
- 
 
-	$resultats = $dbh->query('SET NAMES UTF8');
-	$resultats = $dbh->query('SELECT * from utilisateur WHERE idUtilisateur='.$idUtilisateur);
-	$lignes=$resultats->fetchAll(PDO::FETCH_OBJ);
-	
-	?>
+
+                        $resultats = $dbh->query('SET NAMES UTF8');
+                        $resultats = $dbh->query('SELECT * from utilisateur WHERE idUtilisateur=' . $idUtilisateur);
+                        $lignes = $resultats->fetchAll(PDO::FETCH_OBJ);
+
+                        ?>
 
 
                     <table class="pure-table pure-table-bordered" style="width:70%">
@@ -165,15 +163,15 @@ $codeMairie=NULL;
 
 
                             <?php
-	
-	$numAdherent=NULL;
- 	
-	foreach ($lignes as $colonne)
-	{ 
-		
-	?>
+
+                                $numAdherent = NULL;
+
+                                foreach ($lignes as $colonne) {
+
+                                ?>
                             <tr>
-                                <td style="background-color:#333334; color:#FFF; font-weight:bold">Etat de votre compte</td>
+                                <td style="background-color:#333334; color:#FFF; font-weight:bold">Etat de votre compte
+                                </td>
 
                                 <!-- AVANT MISE EN PROD 1ER SEPTEMBRE 
         <td style="background-color:#F00; font-size:1.2em; text-align:left">
@@ -183,15 +181,14 @@ $codeMairie=NULL;
 
 
                                 <?php
-	  $renouvellement=$colonne->renouvellement;
-        
+                                        $renouvellement = $colonne->renouvellement;
 
-        
-      
-	  if($colonne->renouvellement==1)
-	  { 
-          $anneeEnCours = new DateTime();        
-        ?>
+
+
+
+                                        if ($colonne->renouvellement == 1) {
+                                            $anneeEnCours = new DateTime();
+                                        ?>
                                 <td style="background-color:#F00; font-size:1.2em; text-align:left">
                                     <p class="blancGras">Votre compte doit être renouvelé</p>
 
@@ -199,18 +196,23 @@ $codeMairie=NULL;
 
 
 
-                                    Pour régler par Carte Bancaire les <?php echo $montantAnneeEnCours; ?>€ de votre cotisation, rentrez votre code de sécurité fourni par la mairie puis cliquez sur "RENOUVELER" :<br>
+                                    Pour régler par Carte Bancaire les <?php echo $montantAnneeEnCours; ?>€ de votre
+                                    cotisation, rentrez votre code de sécurité fourni par la mairie puis cliquez sur
+                                    "RENOUVELER" :<br>
 
-                                    <?php if(isset($_GET['codeMairie']) && $_GET['codeMairie']==0 )
-        {
-            ?><span style="background-color: yellow; font-weight:bold; font-size:1.3em">[ ! ] CE CODE DE SECURITE N'EST PAS VALIDE, VEUILLEZ RECOMMENCER</span><?php
-        }
-             
-          ?>
+                                    <?php if (isset($_GET['codeMairie']) && $_GET['codeMairie'] == 0) {
+                                                ?><span
+                                        style="background-color: yellow; font-weight:bold; font-size:1.3em">[ ! ] CE
+                                        CODE DE SECURITE N'EST
+                                        PAS VALIDE, VEUILLEZ RECOMMENCER</span><?php
+                                                                                            }
+
+                                                                                                ?>
 
 
                                     <form class="pure-form" method="post" action="payplug/paiementAdhesion.php">
-                                        <input type="text" name="codeMairie" placeholder="Code sécurité mairie" required>
+                                        <input type="text" name="codeMairie" placeholder="Code sécurité mairie"
+                                            required>
                                         <input type="hidden" name="idU" value="<?php echo $idUtilisateur; ?>">
                                         <input type="hidden" name="nom" value="<?php echo $nom; ?>">
                                         <input type="hidden" name="prenom" value="<?php echo $prenom; ?>">
@@ -225,7 +227,8 @@ $codeMairie=NULL;
 
 
 
-                                    <br><br>Sinon envoyez un chèque de <?php echo $montantAnneeEnCours; ?>€ à l'adresse :<br>
+                                    <br><br>Sinon envoyez un chèque de <?php echo $montantAnneeEnCours; ?>€ à l'adresse
+                                    :<br>
                                     <strong> Association Vivre Megève<br>
                                         Tour MAGDELAIN<br>
                                         28, place de l'église<br>
@@ -233,56 +236,60 @@ $codeMairie=NULL;
                                     </strong>
 
                                     <br>
-                                    Veuillez dans cet envoi préciser votre numéro d'adhérent :<strong> <?php echo $colonne->numAdherent; ?> </strong> ainsi que le code de sécurité fourni par la mairie
+                                    Veuillez dans cet envoi préciser votre numéro d'adhérent :<strong>
+                                        <?php echo $colonne->numAdherent; ?> </strong> ainsi que le code de sécurité
+                                    fourni par la mairie
                                 </td>
-                                <?php   
-	  }
-	  else
-	   { 
-	   if($paiement==1)
-		{ ?>
+                                <?php
+                                        } else {
+                                            if ($paiement == 1) { ?>
 
                                 <td style="background-color:#0C0; font-size:1.2em">Votre cotisation est à jour</td>
-                                <?php  
-		}
-		else
-		{
-			?> <td style="background-color:#FC0; font-size:1.2em">Votre paiement n'est pas à jour<br><a href="payplug/paiementAdhesion.php?idU=<?php echo $idUtilisateur;?>&nom=<?php echo trim($colonne->nom);?>&prenom=<?php echo trim($colonne->prenom);?>&email=<?php echo trim($colonne->email);?>&codeMairieGet=<?php echo trim($colonne->codeMairie);?>">Payer maintenant</a></td> <?php
-		}
-	  }
-      
-      
-	  ?>
+                                <?php
+                                            } else {
+                                            ?> <td style="background-color:#FC0; font-size:1.2em">Votre paiement n'est
+                                    pas à jour<br><a
+                                        href="payplug/paiementAdhesion.php?idU=<?php echo $idUtilisateur; ?>&nom=<?php echo trim($colonne->nom); ?>&prenom=<?php echo trim($colonne->prenom); ?>&email=<?php echo trim($colonne->email); ?>&codeMairieGet=<?php echo trim($colonne->codeMairie); ?>">Payer
+                                        maintenant</a></td> <?php
+                                                                        }
+                                                                    }
+
+
+                                                                            ?>
 
                             </tr>
                             <tr>
-                                <td style="background-color:#ea0079; color:#FFF; font-weight:bold">N° adhérent Vivre Megève</td>
-                                <td><strong><span class="grand"><?php $numAdherent=$colonne->numAdherent; echo $colonne->numAdherent; ?></span></strong></td>
+                                <td style="background-color:#ea0079; color:#FFF; font-weight:bold">N° adhérent Vivre
+                                    Megève</td>
+                                <td><strong><span class="grand"><?php $numAdherent = $colonne->numAdherent;
+                                                                        echo $colonne->numAdherent; ?></span></strong>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="background-color:#333334; color:#FFF; font-weight:bold">N° carte résident</td>
+                                <td style="background-color:#333334; color:#FFF; font-weight:bold">N° carte résident
+                                </td>
                                 <td><strong><?php echo $colonne->numResident; ?></strong></td>
                             </tr>
 
                             <tr>
                                 <td style="background-color:#333334; color:#FFF; font-weight:bold">Votre statut</td>
-                                <td><?php 
-		
-		switch ($colonne->typeAdherent) {
-    case "RP":
-        echo "Résident permanent";
-        break;
-    case "RS":
-        echo "Résident secondaire";
-        break;
-    case "TS":
-        echo "Travailleur/Saisonnier";
-        break;
-    case "CP":
-        echo "Commerçant permanant";
-        break;
-}
-		?></td>
+                                <td><?php
+
+                                            switch ($colonne->typeAdherent) {
+                                                case "RP":
+                                                    echo "Résident permanent";
+                                                    break;
+                                                case "RS":
+                                                    echo "Résident secondaire";
+                                                    break;
+                                                case "TS":
+                                                    echo "Travailleur/Saisonnier";
+                                                    break;
+                                                case "CP":
+                                                    echo "Commerçant permanant";
+                                                    break;
+                                            }
+                                            ?></td>
                             </tr>
 
                             <tr>
@@ -299,27 +306,25 @@ $codeMairie=NULL;
                             </tr>
 
                             <tr>
-                                <td style="background-color:#333334; color:#FFF; font-weight:bold">Date de naissance</td>
-                                <td><?php 
-		$date = new DateTime($colonne->ddn);
-		echo $date->format('d/m/Y');
-		
-		?></td>
+                                <td style="background-color:#333334; color:#FFF; font-weight:bold">Date de naissance
+                                </td>
+                                <td><?php
+                                            $date = new DateTime($colonne->ddn);
+                                            echo $date->format('d/m/Y');
+
+                                            ?></td>
                             </tr>
 
                             <tr>
                                 <td style="background-color:#333334; color:#FFF; font-weight:bold">Paiement</td>
-                                <td><?php 
-		if($colonne->typePaiement=="cb")
-		{
-			echo "Carte Bancaire";
-		}
-		else
-		{
-			echo "Chèque"; 	
-		}
-		
-		?></td>
+                                <td><?php
+                                            if ($colonne->typePaiement == "cb") {
+                                                echo "Carte Bancaire";
+                                            } else {
+                                                echo "Chèque";
+                                            }
+
+                                            ?></td>
                             </tr>
 
                             <tr>
@@ -332,16 +337,33 @@ $codeMairie=NULL;
                                 <td style="width:30%"><?php echo $colonne->telephone; ?></td>
                             </tr>
                             <tr>
-                                <td style="background-color:#333334; color:#FFF; font-weight:bold; width:20%">Adresse</td>
-                                <td style="width:30%"><?php echo $colonne->adresse." "; ?><?php echo $colonne->code_postal." "; ?><?php echo $colonne->ville; ?></td>
+                                <td style="background-color:#333334; color:#FFF; font-weight:bold; width:20%">Adresse
+                                </td>
+                                <td style="width:30%">
+                                    <?php echo $colonne->adresse . " "; ?><?php echo $colonne->code_postal . " "; ?><?php echo $colonne->ville; ?>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td style="background-color:#333334; color:#FFF; font-weight:bold">Consentement
+                                    communication Vivre
+                                    Megève</td>
+                                <td><?php echo ($colonne->rgpd_vivre_megeve == 1) ? "✅ Oui" : "❌ Non"; ?></td>
+                            </tr>
+                            <tr>
+                                <td style="background-color:#333334; color:#FFF; font-weight:bold">Consentement
+                                    communication
+                                    Forfaits/Mairie</td>
+                                <td><?php echo ($colonne->rgpd_mairie_megeve == 1) ? "✅ Oui" : "❌ Non"; ?></td>
                             </tr>
 
 
                             <?php
-	
-	
-	}	
-	$resultats->closeCursor(); ?>
+
+
+                                }
+                                $resultats->closeCursor(); ?>
 
 
 
@@ -376,117 +398,105 @@ $codeMairie=NULL;
 
                         <tbody>
 
-                            <?php 
-	  $dernierJustificatif=NULL;
-	$resultats = $dbh->query('SET NAMES UTF8');
-	$resultats = $dbh->query('SELECT * from utilisateur WHERE idUtilisateur='.$idUtilisateur);
-	$lignes=$resultats->fetchAll(PDO::FETCH_OBJ);
-	
-    
- 	foreach ($lignes as $colonne)
-	{ 
-	?>
+                            <?php
+                                $dernierJustificatif = NULL;
+                                $resultats = $dbh->query('SET NAMES UTF8');
+                                $resultats = $dbh->query('SELECT * from utilisateur WHERE idUtilisateur=' . $idUtilisateur);
+                                $lignes = $resultats->fetchAll(PDO::FETCH_OBJ);
+
+
+                                foreach ($lignes as $colonne) {
+                                ?>
                             <tr>
                                 <td>
-                                    <?php 
-			$datee = new DateTime($colonne->dateAdhesion);
-			echo $datee->format('d/m/Y');
-            $dateExpiration=NULL;
-			if($datee->format('m')<9)
-            {
-                $dateExpiration=$datee->format('Y')."-08-31";
-            }
-            else
-            {
-                $dateExpiration=($datee->format('Y')+1)."-08-31";;
-            }
-                ?>
+                                    <?php
+                                            $datee = new DateTime($colonne->dateAdhesion);
+                                            echo $datee->format('d/m/Y');
+                                            $dateExpiration = NULL;
+                                            if ($datee->format('m') < 9) {
+                                                $dateExpiration = $datee->format('Y') . "-08-31";
+                                            } else {
+                                                $dateExpiration = ($datee->format('Y') + 1) . "-08-31";;
+                                            }
+                                            ?>
                                 </td>
                                 <td><?php $datee = new DateTime($dateExpiration);
-			echo $datee->format('d/m/Y');?></td>
+                                            echo $datee->format('d/m/Y'); ?></td>
                                 <td>Adhésion initiale</td>
                                 <td><?php echo $colonne->montantAdhesion; ?>€</td>
                                 <td>
 
                                     <?php
-			if($paiement==1)
-		{ ?>
-                                    <a href="<?php echo $dernierJustificatif=$domaine.'cartesGenerees/'.$colonne->urlCarte; ?>" target="_blank">Téléchargement</a>
+                                            if ($paiement == 1) { ?>
+                                    <a href="<?php echo $dernierJustificatif = $domaine . 'cartesGenerees/' . $colonne->urlCarte; ?>"
+                                        target="_blank">Téléchargement</a>
                                     <?php
-		}
-		else
-		{
-		   echo "En attente de réception du paiement";	
-		}
-           ?>
+                                            } else {
+                                                echo "En attente de réception du paiement";
+                                            }
+                                            ?>
 
 
                                 </td>
                             </tr> <?php
-	
-	
-	}	
-	$resultats->closeCursor(); 
-	  
-      
-      
-	
-	$resultats2 = $dbh->query('SET NAMES UTF8');
-	$resultats2 = $dbh->query('SELECT * from renouvellement WHERE idUtilisateur='.$idUtilisateur.' order by date');
-	$lignes2=$resultats2->fetchAll(PDO::FETCH_OBJ);
-	
-    
- 	foreach ($lignes2 as $colonne2)
-	{ 
-	?>
+
+
+                                        }
+                                        $resultats->closeCursor();
+
+
+
+
+                                        $resultats2 = $dbh->query('SET NAMES UTF8');
+                                        $resultats2 = $dbh->query('SELECT * from renouvellement WHERE idUtilisateur=' . $idUtilisateur . ' order by date');
+                                        $lignes2 = $resultats2->fetchAll(PDO::FETCH_OBJ);
+
+
+                                        foreach ($lignes2 as $colonne2) {
+                                            ?>
                             <tr>
-                                <td><?php 
-            $datee = new DateTime($colonne2->date);
-            $mois=$datee->format('n');
-            $anneeExpiration=NULL;
-            $periodeAdhesion=NULL;
-            if($mois<9)
-            {
-                $anneeExpiration=$datee->format('Y');
-                $periodeAdhesion=($datee->format('Y')-1)."/".$datee->format('Y'); 
-            }
-            else
-            {
-                $anneeExpiration=$datee->format('Y')+1;
-                $periodeAdhesion=$datee->format('Y')."/".($datee->format('Y')+1); 
-            }
-        
-            echo $datee->format('d/m/Y'); ?></td>
+                                <td><?php
+                                            $datee = new DateTime($colonne2->date);
+                                            $mois = $datee->format('n');
+                                            $anneeExpiration = NULL;
+                                            $periodeAdhesion = NULL;
+                                            if ($mois < 9) {
+                                                $anneeExpiration = $datee->format('Y');
+                                                $periodeAdhesion = ($datee->format('Y') - 1) . "/" . $datee->format('Y');
+                                            } else {
+                                                $anneeExpiration = $datee->format('Y') + 1;
+                                                $periodeAdhesion = $datee->format('Y') . "/" . ($datee->format('Y') + 1);
+                                            }
+
+                                            echo $datee->format('d/m/Y'); ?></td>
                                 <td>
                                     <?php
-        $datee = new DateTime($colonne2->date);
-            $dateExpiration=NULL;
-			if($datee->format('n')<9)
-            {
-                $dateExpiration=$datee->format('Y')."-08-31";
-            }
-            else
-            {
-                $dateExpiration=($datee->format('Y')+1)."-08-31";;
-            }
-         $datee = new DateTime($dateExpiration);
-			echo $datee->format('d/m/Y');;
-        ?>
+                                            $datee = new DateTime($colonne2->date);
+                                            $dateExpiration = NULL;
+                                            if ($datee->format('n') < 9) {
+                                                $dateExpiration = $datee->format('Y') . "-08-31";
+                                            } else {
+                                                $dateExpiration = ($datee->format('Y') + 1) . "-08-31";;
+                                            }
+                                            $datee = new DateTime($dateExpiration);
+                                            echo $datee->format('d/m/Y');;
+                                            ?>
                                 </td>
                                 <td>Renouvellement
-                                    <?php 
-               
-                echo $periodeAdhesion;
-                ?>
+                                    <?php
+
+                                            echo $periodeAdhesion;
+                                            ?>
                                 </td>
                                 <td><?php echo $colonne2->montant; ?>€</td>
-                                <td><a href="<?php echo $dernierJustificatif=$domaine.'cartesGenerees/'.$colonne2->urljustificatif; ?>" target="_blank">Téléchargement</a></td>
+                                <td><a href="<?php echo $dernierJustificatif = $domaine . 'cartesGenerees/' . $colonne2->urljustificatif; ?>"
+                                        target="_blank">Téléchargement</a></td>
                             </tr> <?php
-	
-	
-	}	
-	$resultats2->closeCursor(); 
-	  ?>
+
+
+                                        }
+                                        $resultats2->closeCursor();
+                                            ?>
 
 
 
@@ -508,28 +518,24 @@ $codeMairie=NULL;
                         <h4>Votre <span class="color">JUSTIFICATIF </span> d'adhésion EN COURS</h4>
                     </div>
                     <?php
-	
-			
-		if($paiement==1)
-		{
-		
-			if($renouvellement==0 )
-			{?>
-                    <a href="<?php echo $dernierJustificatif; ?>" target="_blank"> <img src="images/telechargerVotreCarte.png"></a>
+
+
+                        if ($paiement == 1) {
+
+                            if ($renouvellement == 0) { ?>
+                    <a href="<?php echo $dernierJustificatif; ?>" target="_blank"> <img
+                            src="images/telechargerVotreCarte.png"></a>
                     <?php
-			}
-			else
-			{
-				?>Votre compte doit être renouvelé. Veuillez suivre s'il vous plait les instructions en haut de cette page dans l'encadré rouge.<?php
-			}
-			
-			
-		}
-		else
-		{ 
-			if($typePaiement=="cheque")
-			{ ?>
-                    Votre justificatif sera disponible une fois votre chèque encaissé. Pour rappel, ce chèque de <strong><?php echo $montantAnneeEnCours; ?>€</strong> à l'ordre de "Association Vivre Megève" doit être envoyé à l'adresse suivante :<br><br>
+                            } else {
+                                ?>Votre compte doit être renouvelé. Veuillez suivre s'il vous plait les instructions en
+                    haut de cette page dans
+                    l'encadré rouge.<?php
+                                            }
+                                        } else {
+                                            if ($typePaiement == "cheque") { ?>
+                    Votre justificatif sera disponible une fois votre chèque encaissé. Pour rappel, ce chèque de
+                    <strong><?php echo $montantAnneeEnCours; ?>€</strong> à l'ordre de "Association Vivre Megève" doit
+                    être envoyé à l'adresse suivante :<br><br>
 
                     Association Vivre Megève<br>
                     Tour MAGDELAIN<br>
@@ -538,13 +544,14 @@ $codeMairie=NULL;
 
 
                     <br>
-                    Veuillez dans cet envoi préciser votre numéro d'adhérent :<strong> <?php echo $numAdherent; ?></strong>
+                    Veuillez dans cet envoi préciser votre numéro d'adhérent :<strong>
+                        <?php echo $numAdherent; ?></strong>
 
-                    <?php 
-			}
-			else
-			{ ?>
-                    Votre justificatif sera disponible une fois votre paiement reçu. Vous avez choisi de régler par Carte Bancaire, vous pouvez dès maintenant finaliser votre inscription en réglant ici la somme de <?php echo $montantAnneeEnCours; ?>€ en ligne :<br><br>
+                    <?php
+                                            } else { ?>
+                    Votre justificatif sera disponible une fois votre paiement reçu. Vous avez choisi de régler par
+                    Carte Bancaire, vous pouvez dès maintenant finaliser votre inscription en réglant ici la somme de
+                    <?php echo $montantAnneeEnCours; ?>€ en ligne :<br><br>
                     <form class="pure-form" method="post" action="payplug/paiementAdhesion.php">
                         <input type="hidden" name="idU" value="<?php echo $idUtilisateur; ?>">
                         <input type="hidden" name="nom" value="<?php echo $nom; ?>">
@@ -558,11 +565,11 @@ $codeMairie=NULL;
                         <button type="submit" class="pure-button pure-button-primary">REGLER L'INSCRIPTION</button>
                     </form>
 
-                    <?php 
-			
-			}
-		}
-		?>
+                    <?php
+
+                                            }
+                                        }
+                        ?>
 
                 </div>
             </div>
@@ -576,7 +583,8 @@ $codeMairie=NULL;
     <footer class="w-section footer">
         <div class="bottom-footer">
             <div class="w-container cont-center">
-                <p class="p-footer">Création du site : <a href="http://www.remyperret.com" target="_blank">Rémy PERRET </a></p>
+                <p class="p-footer">Création du site : <a href="http://www.remyperret.com" target="_blank">Rémy PERRET
+                    </a></p>
             </div>
         </div>
 
@@ -588,7 +596,9 @@ $codeMairie=NULL;
                         <h1 class="top-footer">A propos de l'association</h1>
                     </div>
                     <div class="div-spc">
-                        <p><em><strong>Association</strong> de type loi "1901" crée à titre non lucratif avec pour objectif de représenter, défendre et informer ses membres en leur qualité d'usager des Services Publics Industriels et Commerciaux (SPIC)<br></em></p>
+                        <p><em><strong>Association</strong> de type loi "1901" crée à titre non lucratif avec pour
+                                objectif de représenter, défendre et informer ses membres en leur qualité d'usager des
+                                Services Publics Industriels et Commerciaux (SPIC)<br></em></p>
                     </div>
                 </div>
 
@@ -599,7 +609,11 @@ $codeMairie=NULL;
                         <h1 class="top-footer">Contact info</h1>
                     </div>
                     <div class="div-spc">
-                        <p> <strong>Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact@vivremegeve.fr<br><strong>Adresse:</strong>&nbsp;&nbsp;&nbsp;&nbsp;Tour MAGDELAIN, 28, place de l'église <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;74120 MEGEVE&nbsp;</p>
+                        <p> <strong>Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact@vivremegeve.fr<br><strong>Adresse:</strong>&nbsp;&nbsp;&nbsp;&nbsp;Tour
+                            MAGDELAIN, 28, place de l'église
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;74120
+                            MEGEVE&nbsp;
+                        </p>
                     </div>
                 </div>
             </div>
@@ -619,12 +633,10 @@ $codeMairie=NULL;
 </html>
 
 
-<?php 
-}	
-catch(Exception $e)
-{
-  $dbh->rollBack();
-  echo "Une erreur est survenue. Veuillez cliquez <a href=\"javascript:history.back()\">ici</a>et ressayer l'opération." ;
-  echo $e->getMessage();
+<?php
+} catch (Exception $e) {
+    $dbh->rollBack();
+    echo "Une erreur est survenue. Veuillez cliquez <a href=\"javascript:history.back()\">ici</a>et ressayer l'opération.";
+    echo $e->getMessage();
 }
 ?>
