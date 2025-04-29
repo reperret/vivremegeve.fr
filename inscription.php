@@ -129,7 +129,7 @@ try {
 
 
                     //$dbh->beginTransaction();
-                    $reqInsert = $dbh->prepare("INSERT INTO utilisateur (email,pass_md5,nom,prenom,telephone,code_postal,adresse,ville,code_postal2,adresse2,ville2, civilite, numResident, urlPhoto, ddn, typeAdherent, typePaiement, dateAdhesion, login, logNavigateur, renouvellement, montantAdhesion, codeMairie, rgpd_vivre_megeve, rgpd_mairie_megeve) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $reqInsert = $dbh->prepare("INSERT INTO utilisateur (email,pass_md5,nom,prenom,telephone,code_postal,adresse,ville,code_postal2,adresse2,ville2, civilite, numResident, urlPhoto, ddn, typeAdherent, typePaiement, dateAdhesion, login, logNavigateur, renouvellement, montantAdhesion, codeMairie, rgpd_vivre_megeve, rgpd_mairie_megeve) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                     $reqInsert->bindParam(1, $email);
                     $reqInsert->bindParam(2, $passmd5);
